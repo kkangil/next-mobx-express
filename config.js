@@ -3,7 +3,7 @@ const NODE_ENV = process.env.NODE_ENV || 'develop'
 let config = {
   port: 8080,
   db: {
-    host: 'db_host',
+    host: 'db-host',
     database: 'dev',
     username: 'dev',
     password: 'qwerTY!@',
