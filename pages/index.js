@@ -2,6 +2,8 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import withData from '@/components/hoc/with-data'
 
+import PostActions from '@/actions/posts'
+
 import Head from 'components/head'
 import Footer from 'components/footer'
 import MainComponent from '@/components/main'
@@ -16,13 +18,31 @@ export default class Main extends React.Component {
     return { query }
   }
 
-  componentWillMount() {
+  state = {
+    posts: []
+  }
+
+  async componentWillMount() {
+    if (this.props.isServer) {
+      this.setState({
+        posts: this.props.query.posts
+      })
+    } else {
+      try {
+        const posts = await PostActions.getPosts()
+        this.setState({
+          posts
+        })
+
+      } catch (err) {
+        alert(err.errorMessage)
+      }
+    }
     this.sampleStore.setText('Hello! This is main page')
   }
 
   render() {
-    console.log(this.props)
-    const { posts } = this.props.query
+    const { posts } = this.state
     const { text } = this.sampleStore
     return [
       <Head key="head" />,

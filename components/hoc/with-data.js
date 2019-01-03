@@ -4,11 +4,11 @@ import { initStore } from 'stores'
 
 export default ComposedComponent => {
   return class WithData extends Component {
-    static async getInitialProps(ctx) {
+    static async getInitialProps(props) {
       let composedInitialProps
-      const isServer = !!ctx.req
+      const isServer = !!props.req
       if (ComposedComponent.getInitialProps) {
-        composedInitialProps = await ComposedComponent.getInitialProps(ctx)
+        composedInitialProps = await ComposedComponent.getInitialProps(props)
       }
       return { isServer, ...composedInitialProps }
     }

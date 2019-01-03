@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "precommit": "lint-staged",
     "build": "next build",
-    "start": "nodemon server.js"
+    "start": "next start",
+    "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +27,7 @@
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.7",
     "path": "^0.12.7",
+    "prettier": "^1.15.3",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "sequelize": "^4.41.2",
@@ -37,5 +40,11 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "prettier --no-semi --single-quote --write --prose-wrap never",
+      "git add"
+    ]
   }
 }

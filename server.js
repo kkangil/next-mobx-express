@@ -45,7 +45,7 @@ app.prepare().then(async () => {
       url: req.url,
       status: err.status || 500,
       method: req.method,
-      message: err.message || err.text || 'There was an error on API server',
+      errorMessage: err.message || err.text || 'There was an error on API server',
       userId: req.validUser ? req.validUser.id : null,
       env: process.env.NODE_ENV
     }
